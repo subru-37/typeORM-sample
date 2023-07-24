@@ -1,9 +1,10 @@
 import { Entity, Column, BaseEntity, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 @Entity("person")
+// {
+//     type: "uuid",
+//   }
 export class Person extends BaseEntity {
-  @PrimaryColumn({
-    type: "uuid",
-  })
+  @PrimaryColumn()
   id: string;
   @Column()
   firstname: string;
@@ -11,10 +12,8 @@ export class Person extends BaseEntity {
   lastname: string;
   @Column({ unique: true })
   email: string;
-  @Column({ unique: true, length: 10 })
-  card_number: string;
   @CreateDateColumn()
-  createdat: Date;
+  createdate: Date;
   @UpdateDateColumn()
   UpdateDateColumn: Date;
 }
