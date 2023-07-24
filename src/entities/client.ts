@@ -24,14 +24,9 @@ export class Client extends Person {
   @Column({ type: "simple-array", default: [] })
   beneficiary: string[];
 
-  @OneToMany(
-    ()=>Transactions,
-    transaction => transaction.client
-  )
-  transactions: Transactions[]
+  @OneToMany(() => Transactions, (transaction) => transaction.client)
+  transactions: Transactions[];
 
-  @ManyToMany(
-    ()=> Banker
-  )
-  bankers: Banker[]
+  @ManyToMany(() => Banker)
+  bankers: Banker[];
 }

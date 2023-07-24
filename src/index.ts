@@ -4,7 +4,9 @@ import { Banker } from "./entities/banker";
 import { Transactions } from "./entities/transaction";
 import express from "express";
 import { createClientRouter } from "./route/create_client";
-import { createBankerRouter } from "./route/banker";
+import { createBankerRouter } from "./route/create_banker";
+import { createTransactionId } from "./route/create_transaction";
+import { connectBankerToClient } from "./route/connect_banker_to_client";
 const PORT = 8080;
 const app = express();
 const main = async () => {
@@ -24,6 +26,8 @@ const main = async () => {
   app.use(express.json());
   app.use(createClientRouter);
   app.use(createBankerRouter);
+  app.use(createTransactionId);
+  app.use(connectBankerToClient);
   try {
     AppDataSource.initialize();
     console.log("Data Source has been initialized!");
