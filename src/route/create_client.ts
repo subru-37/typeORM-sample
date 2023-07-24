@@ -3,6 +3,7 @@ const router = express.Router();
 import { Client } from "../entities/client";
 router.post("/api/client", async (req, res) => {
   const { firstName, lastName, email, cardNumber, balance, id } = req.body;
+//   console.log(req.body);
   const client = Client.create({
     id:id,
     firstname: firstName,

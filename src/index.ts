@@ -7,10 +7,11 @@ import { createClientRouter } from "./route/create_client";
 import { createBankerRouter } from "./route/create_banker";
 import { createTransactionId } from "./route/create_transaction";
 import { connectBankerToClient } from "./route/connect_banker_to_client";
+import { deleteClientRouter } from "./route/delelte_client";
+import { fetchClientRouter } from "./route/fetch_clients";
 const PORT = 8080;
 const app = express();
-const main = async () => {
-  const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -20,6 +21,7 @@ const main = async () => {
     entities: [Client, Banker, Transactions],
     synchronize: true,
   });
+const main = async () => {
   app.listen(PORT, () => {
     console.log(`app listening on PORT ${PORT}`);
   });
@@ -28,6 +30,8 @@ const main = async () => {
   app.use(createBankerRouter);
   app.use(createTransactionId);
   app.use(connectBankerToClient);
+  app.use(deleteClientRouter);
+  app.use(fetchClientRouter);
   try {
     AppDataSource.initialize();
     console.log("Data Source has been initialized!");
@@ -37,3 +41,6 @@ const main = async () => {
   }
 };
 main();
+export {
+    AppDataSource
+}

@@ -17,7 +17,10 @@ export class Transactions extends BaseEntity{
 
     @ManyToOne(
         ()=>Client,
-        client => client.transactions
+        client => client.transactions,
+        {
+            onDelete: "CASCADE"
+        }
     )
     @JoinColumn(
         {
