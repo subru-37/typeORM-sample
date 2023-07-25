@@ -9,6 +9,8 @@ import { createTransactionId } from "./route/create_transaction";
 import { connectBankerToClient } from "./route/connect_banker_to_client";
 import { deleteClientRouter } from "./route/delelte_client";
 import { fetchClientRouter } from "./route/fetch_clients";
+import { UserOtp } from "./entities/otp";
+import { sendOTPtophone } from "./route/send_otp";
 const PORT = 8080;
 const app = express();
 const AppDataSource = new DataSource({
@@ -18,7 +20,7 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "subrurocks",
     database: "typeorm",
-    entities: [Client, Banker, Transactions],
+    entities: [Client, Banker, Transactions,UserOtp],
     synchronize: true,
   });
 const main = async () => {
@@ -32,6 +34,7 @@ const main = async () => {
   app.use(connectBankerToClient);
   app.use(deleteClientRouter);
   app.use(fetchClientRouter);
+  app.use(sendOTPtophone);
   try {
     AppDataSource.initialize();
     console.log("Data Source has been initialized!");
